@@ -47,3 +47,7 @@ void MqttService::sendAccData(float accData) {
 void MqttService::sendGyroData(float gyroData) {
     publishData("imu/gyro", gyroData);
 }
+
+void MqttService::sendLijnData(float lijnData) {
+    publishData("lijnsensor/lijnsensor", lijnData)
+}

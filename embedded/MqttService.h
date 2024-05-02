@@ -13,6 +13,7 @@ public:
     void sendMagData(float magData);
     void sendAccData(float accData);
     void sendGyroData(float gyroData);
+    void sendLijnData(float lijnData);
 
 private:
     std::string brokerAddress = "localhost";
