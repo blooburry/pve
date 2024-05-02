@@ -1,16 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <h1> Zumo GUI </h1>
+
+  <IMUSensor></IMUSensor>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import IMUSensor from './components/IMUSensor.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    IMUSensor
   }
 });
 </script>
