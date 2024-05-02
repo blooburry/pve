@@ -1,4 +1,4 @@
-{../frontend../frontend/src/*../frontend/src/**/*.ts../frontend/src/**/*.tsx../frontend/src/**/*.vue../frontend/tests/**/*.ts../frontend/tests/**/*.tsx../frontend/node_modules
+{
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
