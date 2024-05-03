@@ -8,7 +8,7 @@ Zumo32U4ButtonA buttonA;
 // A sensors reading must be greater than or equal to this
 // threshold in order for the program to consider that sensor as
 // seeing an object.
-const uint8_t sensorThreshold = 6;
+const uint8_t sensorThreshold = 5;
 
 #define LEFT 0
 #define RIGHT 1
@@ -21,7 +21,7 @@ bool turningRight = false;
 
 // If the robot is turning, this is the speed it will use. 400 is
 // full speed.
-uint16_t turnSpeed = 200;
+uint16_t turnSpeed = 350;
 
 // The time, in milliseconds, when an object was last seen.
 uint16_t lastTimeObjectSeen = 0;
