@@ -1,6 +1,7 @@
 #include "SensorDataBuffer.h"
 #include <Zumo32U4.h>
 
+using Vec3D = Zumo32U4IMU::vector<int>; // de `vector` library struct 
 using namespace std;
 
 #ifndef IMUSENSOR_H
@@ -9,23 +10,12 @@ using namespace std;
 // Wrapper klasse voor de Zumo32U4IMU library klasse. Hij s
 class IMUSensor {
   public:
-    struct Point3D {
-    float x;
-    float y;
-    float z;
-  };
-
-  struct IMUSensorData {
-    Point3D mag;
-    Point3D gyro;
-    Point3D acc;
-  };
-
     IMUSensor(SensorDataBuffer* datasinkPointer);
 
-    const SensorDataBuffer::Point3D leesGyro();
-    const SensorDataBuffer::Point3D leesMag();
-    const SensorDataBuffer::Point3D leesAcc();
+    const Vec3D leesGyro();
+    const Vec3D leesMag();
+    const Vec3D leesAcc();
+    void sendToBuffer(); // stuur de data naar de SensorDataBuffer
 
   private:
     Zumo32U4IMU imu; // een instance van de library klasse

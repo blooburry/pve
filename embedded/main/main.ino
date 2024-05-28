@@ -3,18 +3,14 @@
 #include "IMUSensor.h"
 #include "SensorDataBuffer.h"
 
-Zumo32U4IMU imu;
-char report[120];
 int i = 0;
+SensorDataBuffer buffer;
+IMUSensor imu(&buffer);
 
 void setup()
 {
 
     Wire.begin();
-
-    SensorDataBuffer buffer;
-
-    IMUSensor imu(&buffer);
 
     while (!Serial)
     {
@@ -37,14 +33,9 @@ void loop()
     Serial.print(i);
     Serial.println(F("s"));
 
-    imu.read();
+    imu.sendToBuffer();
 
-    snprintf_P(report, sizeof(report),
-               PSTR("Accel: %6d %6d %6d    Mag: %6d %6d %6d    Gyro: %6d %6d %6d"),
-               imu.a.x, imu.a.y, imu.a.z,
-               imu.m.x, imu.m.y, imu.m.z,
-               imu.g.x, imu.g.y, imu.g.z);
-    Serial.println(report);
+    if(i % 10 == 0) { buffer.stuurData(); } // elke 10 seconden
 
     delay(1000);
     i++;

@@ -1,6 +1,8 @@
 #include <Vector.h>
+#include <Zumo32U4.h>
 
 using namespace std;
+using Vec3D = Zumo32U4IMU::vector<int>; // de `vector` library struct 
 
 #ifndef SENSORDATABUFFER_H
 #define SENSORDATABUFFER_H
@@ -8,16 +10,10 @@ using namespace std;
 // Slaat een geschiedenis op van de data van alle sensoren, en stuurt deze periodiek om naar de XBee
 class SensorDataBuffer {  // mock klasse voor testing
 public:
-  struct Point3D {
-    float x;
-    float y;
-    float z;
-  };
-
   struct IMUSensorData {
-    Point3D mag;
-    Point3D gyro;
-    Point3D acc;
+    Vec3D mag;
+    Vec3D gyro;
+    Vec3D acc;
   };
 
   struct LineSensorData {
@@ -25,14 +21,14 @@ public:
     int sensor2;
     int sensor3;
   };
-  void bufferDataIMU(const IMUSensorData& data);
   SensorDataBuffer();
+  void bufferDataIMU(const IMUSensorData& data);
+  const void stuurData();
 
 private:
   Vector<IMUSensorData> imuSensordata;
   Vector<LineSensorData> lineSensorData;
   Vector<int> proxSensorData;
-  const void stuurData();
 };
 
 #endif
