@@ -1,4 +1,4 @@
-#include <Vector.h>
+#include <SimpleVector.h>
 #include <Zumo32U4.h>
 
 using namespace std;
@@ -16,19 +16,25 @@ public:
     Vec3D acc;
   };
 
-  struct LineSensorData {
+  struct LijnSensorData {
     int sensor1;
     int sensor2;
     int sensor3;
   };
+
   SensorDataBuffer();
   void bufferDataIMU(const IMUSensorData& data);
+  void bufferDataProx(const int data);
+  void bufferDataLijn(const LijnSensorData& data);
   const void stuurData();
 
 private:
-  Vector<IMUSensorData> imuSensordata;
-  Vector<LineSensorData> lineSensorData;
-  Vector<int> proxSensorData;
+  SimpleVector<IMUSensorData> imuSensorData;
+  int imuNieuweDataIndex; // deze int houdt bij wat de index was van de eerste rij sensorData die nog niet doorgestuurd is naar de XBee
+  SimpleVector<LijnSensorData> lijnSensorData;
+  int lijnNieuweDataIndex;
+  SimpleVector<int> proxSensorData;
+  int proxNieuweDataIndex;
 };
 
 #endif
