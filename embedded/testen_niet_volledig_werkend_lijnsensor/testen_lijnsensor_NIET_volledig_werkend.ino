@@ -21,11 +21,11 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial1.begin(9600);
+  buttonA.waitForButton();
   lijn.vindWaardes();
 }
 
 void loop() {
-  //kllijn.vindLijnKleurStatus();
   lijn.stuurNaarMotor();
   //lijn.vindWaardes();
 
