@@ -112,14 +112,15 @@ Lijnsensors
 </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>913</x><y>891</y><w>231</w><h>484</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1= 1
 m2= 1..3
-</panel_attributes><additional_attributes>180;10;180;260;10;420</additional_attributes></element><element><id>UMLClass</id><coordinates><x>594</x><y>572</y><w>231</w><h>110</h></coordinates><panel_attributes>statusControl
+</panel_attributes><additional_attributes>180;10;180;260;10;420</additional_attributes></element><element><id>UMLClass</id><coordinates><x>594</x><y>572</y><w>231</w><h>110</h></coordinates><panel_attributes>StatusControl
 --
-- status: int
+- status: Status
 --
-+ bepalenStatus(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>616</x><y>671</y><w>154</w><h>121</h></coordinates><panel_attributes>lt=&lt;-
-m1=2
++ bepalenStatus(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>594</x><y>671</y><w>88</w><h>121</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
 m2=1
-stuurt status naar &gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1188</x><y>440</y><w>165</w><h>385</h></coordinates><panel_attributes>lt=-&gt;
+bestuurt
+</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1188</x><y>440</y><w>165</w><h>385</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=1
 ontvangt data van v</panel_attributes><additional_attributes>10;330;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1177</x><y>1089</y><w>231</w><h>143</h></coordinates><panel_attributes>IMUSensor
@@ -196,4 +197,16 @@ m2=1</panel_attributes><additional_attributes>10;80;10;10</additional_attributes
 --
 -sensor1: int
 -sensor2: int
--sensor3 int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1518</x><y>825</y><w>132</w><h>231</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;190</additional_attributes></element></diagram>
+-sensor3 int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1518</x><y>825</y><w>132</w><h>231</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;190</additional_attributes></element><element><id>UMLNote</id><coordinates><x>847</x><y>539</y><w>176</w><h>66</h></coordinates><panel_attributes>Deze klas bevat alle
+ wedstrijdregels als 
+verschillende "statussen"</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>297</x><y>561</y><w>198</w><h>154</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+Status
+--
+VolgLijn= 0 	
+HandModus = 1	
+DuwBlokje = 2
+OnthoudtRichting = 3
+HalveSnelheid = 4
+WipModus = 5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>484</x><y>572</y><w>132</w><h>44</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=1</panel_attributes><additional_attributes>10;10;100;10</additional_attributes></element></diagram>
