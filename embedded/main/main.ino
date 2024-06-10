@@ -27,6 +27,8 @@ void loop()
     {
         Serial.println(F("======================================="));
         Serial.println(F("Program start!"));
+        Serial.print(F("Battery voltage: "));
+        Serial.println(readBatteryMillivolts());
     }
 
     Serial.print(F("t="));
