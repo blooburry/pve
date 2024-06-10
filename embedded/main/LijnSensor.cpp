@@ -1,7 +1,7 @@
-#include "Lijnsensor.h"
+#include "LijnSensor.h"
 #include "SensorDataBuffer.h"
-#include "../berekeningen/KleurLijnBerekening.h"
-#include "../aansturing/StatusControl.h"
+#include "KleurLijnBerekening.h"
+#include "StatusControl.h"
 #include <Arduino.h>
 #include <Zumo32U4.h>
 
@@ -11,25 +11,27 @@ int16_t integraal = 0;
 int16_t afgeleide = 0;
 int16_t output = 0;
 
+using Status = StatusControl::Status;
 
 const uint16_t max = 300;
 const uint16_t maxGreenSpeed = 300;
 
 
-Lijnsensor::Lijnsensor(SensorDataBuffer* datasink, StatusControl* sc):
+LijnSensor::LijnSensor(SensorDataBuffer* datasink, StatusControl* sc):
   ber(),
   sc(sc),
   datasink(datasink)
 {
   initFiveSensors();
-
-  this->vindWaardes();
 }
 
-Lijnsensor::~Lijnsensor() {
+LijnSensor::~LijnSensor() {
 }
 
-void Lijnsensor::vindWaardes() {
+void LijnSensor::calibreer() {
+
+  sc->setStatus(Status::CALIBREREN);
+
   uint16_t i;
   for (i = 0; i < 120; i++) {
     //Serial.println(i);
@@ -43,10 +45,10 @@ void Lijnsensor::vindWaardes() {
   }
   
   sc->lijnSetSpeeds(0, 0);
-  sc->setStatus(Status::VOLG_LIJN);
+  sc->setStatus(Status::VOLG_LIJN_ZWART);
 }
 
-void Lijnsensor::stuurNaarMotor() {
+void LijnSensor::stuurNaarMotor() {
   readCalibrated(lsData);
 
   static char ruimte[50];
@@ -97,6 +99,6 @@ void Lijnsensor::stuurNaarMotor() {
 void LijnSensor::sendToBuffer() {
   readCalibrated(lsData);
 
-  SensorDataBuffer::LijnSensorData data = { lsData[0], lsData[1], lsData[2], lsData[3], lsData[4]};
+  SensorDataBuffer::LijnSensorData data = { (int) lsData[0], (int) lsData[1], (int) lsData[2], (int) lsData[3], (int) lsData[4]};
   datasink->bufferDataLijn(data);
 }

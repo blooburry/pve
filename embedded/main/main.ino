@@ -1,25 +1,28 @@
 #include <Wire.h>
 #include <Zumo32U4.h>
-#include "../sensors/IMUSensor.h"
-#include "../sensors/ProxySensor.h"
-#include "../sensors/SensorDataBuffer.h"
-#include "../remote/Xbee.h"
-#include "../remote/KeyInterpreter.h"
-#include "../aansturing/StatusControl.h"
-#include "../aansturing/Motors.h"
+#include "IMUSensor.h"
+#include "ProxySensor.h"
+#include "SensorDataBuffer.h"
+#include "Xbee.h"
+#include "KeyInterpreter.h"
+#include "StatusControl.h"
+#include "Motors.h"
+#include "LijnSensor.h"
 
 using Status = StatusControl::Status;
 
 int i = 0;
+Motors motors;
+StatusControl sc(&motors);
 SensorDataBuffer buffer;
 IMUSensor imu(&buffer);
-ProxySensor prox(&buffer);
+ProxySensor prox(&buffer, &sc);
 LijnSensor* lijnPtr;
 
 Xbee xb;
 KeyInterpreter kp(&xb);
-Motors motors;
-StatusControl sc(&motors);
+
+Zumo32U4ButtonA buttonA;
 
 void setup()
 {
@@ -46,13 +49,11 @@ void loop()
         Serial.println(F("Program start!"));
         Serial.print(F("Battery voltage: "));
         Serial.println(readBatteryMillivolts());
-        
-        sc.setStatus(Status::CALIBREREN);
-        LineSensor lijn(&buffer, &sc);
+      
+        LijnSensor lijn(&buffer, &sc);
         lijnPtr = &lijn;
+        lijnPtr->calibreer();
     }
-
-    sc.tick();
 
     if(millis() % 10000 < 100){ // elke 10 seconden (ongeveer)
         Serial.print(F("t="));

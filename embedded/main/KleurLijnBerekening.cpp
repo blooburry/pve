@@ -1,14 +1,14 @@
-#include "kleurLijnBerekening.h"
+#include "KleurLijnBerekening.h"
 
 
-kleurlijnberekening::kleurlijnberekening() {
+KleurLijnBerekening::KleurLijnBerekening() {
   kleurstatus = 0;
 }
 
-kleurlijnberekening::~kleurlijnberekening() {
+KleurLijnBerekening::~KleurLijnBerekening() {
 }
 
-void kleurlijnberekening::printkk(unsigned int lsData[4]) {
+void KleurLijnBerekening::printkk(unsigned int lsData[4]) {
   static char ruimte[50];
   sprintf(ruimte, "%4d %4d %4d %4d %4d \n",
           lsData[0],
@@ -19,7 +19,7 @@ void kleurlijnberekening::printkk(unsigned int lsData[4]) {
   Serial1.print(ruimte);
 }
 
-int kleurlijnberekening::vindLijnKleurStatus(unsigned int lsData[4]) {
+int KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
   static int tijds = 0;
   if ((int)(millis() - tijds) >= 500) {
     tijds = millis();
@@ -88,6 +88,6 @@ int kleurlijnberekening::vindLijnKleurStatus(unsigned int lsData[4]) {
   }
 }
 
-int kleurlijnberekening::stuurStatus() {
+int KleurLijnBerekening::stuurStatus() {
   return kleurstatus;
 }

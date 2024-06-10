@@ -1,7 +1,6 @@
 #ifndef KLEURLIJNBEREKENING_H
 #define KLEURLIJNBEREKENING_H
 //#include <Zumo32U4.h>
-#include <Arduino.h>
 #include <Zumo32U4.h>
 
 
@@ -20,7 +19,7 @@ private:
 public:
   void printkk(unsigned int lsData[4]);
   KleurLijnBerekening();
-  ~kleurlijnberekening();
+  ~KleurLijnBerekening();
   int vindLijnKleurStatus(unsigned int lsData[4]);
   int stuurStatus();
 };

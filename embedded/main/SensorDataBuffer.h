@@ -27,7 +27,7 @@ public:
   struct ProxSensorData {
     int left;
     int right;
-  }
+  };
 
   SensorDataBuffer();
   void bufferDataIMU(const IMUSensorData& data);

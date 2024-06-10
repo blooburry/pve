@@ -5,18 +5,15 @@
 #include <Wire.h>
 #include <Zumo32U4.h>
 #include "ProxySensor.h"
-#include "../aansturing/Motors.h"
+#include "Motors.h"
 #include "SensorDataBuffer.h"
 
 ProxySensor::ProxySensor(SensorDataBuffer* datasinkPointer, StatusControl* sc):
   datasink(datasinkPointer),
   sc(sc)
 {}
-ProxySensor::~ProxySensor() {}
 
-Motors motors;
-Zumo32U4ProximitySensors proxSensors;
-Zumo32U4ButtonA buttonA;
+ProxySensor::~ProxySensor() {}
 
 // A sensors reading must be greater than or equal to this
 // threshold in order for the program to consider that sensor as
@@ -58,20 +55,20 @@ bool turningRight = false;
 uint16_t turnSpeed = turnSpeedMax;
 
 
-void turnRight() {
-  sc.proxSetSpeeds(turnSpeed, -turnSpeed);
+void ProxySensor::turnRight() {
+  sc->proxSetSpeeds(turnSpeed, -turnSpeed);
   turningLeft = false;
   turningRight = true;
 }
 
-void turnLeft() {
-  sc.proxSetSpeeds(-turnSpeed, turnSpeed);
+void ProxySensor::turnLeft() {
+  sc->proxSetSpeeds(-turnSpeed, turnSpeed);
   turningLeft = true;
   turningRight = false;
 }
 
-void stop() {
-  sc.proxSetSpeeds(0, 0);
+void ProxySensor::stop() {
+  sc->proxSetSpeeds(0, 0);
   turningLeft = false;
   turningRight = false;
 }
@@ -123,7 +120,7 @@ bool ProxySensor::zieObject() {
       // The values are equal, so go straight to push object.
       bool zien = true;
       while (zien) {
-        motors.setSpeeds(200, 200);
+        sc->proxSetSpeeds(200, 200);
         delayMicroseconds(3000000);
         read();  // Update sensor readings
         leftValue = countsFrontWithLeftLeds();
@@ -155,5 +152,5 @@ void ProxySensor::sendToBuffer() {
   readings[1] = rightValue;
 
   SensorDataBuffer::ProxSensorData data = { readings[0], readings[1]};
-  datasink->bufferDataLijn(data);
+  datasink->bufferDataProx(data);
 }
