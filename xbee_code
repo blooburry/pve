@@ -1,0 +1,96 @@
+#include <Zumo32U4.h>
+#include <Zumo32U4Buttons.h>
+
+// Initialisatie van de knoppen van de Zumo
+Zumo32U4ButtonA buttonA;
+Zumo32U4ButtonB buttonB;
+Zumo32U4ButtonC buttonC;
+
+void setup() {
+  Serial1.begin(9600);  // Start de Xbee communicatie met een baudrate van 9600
+  Serial1.setTimeout(800);  // Stel de maximale tijd voor het wachten op de ingestuurde gegevens op 800 ms
+
+}
+
+void loop() {
+  if (Serial1.available() > 0) {  // Controleer of er gegevens zijn gestuurd door de XBee
+    String input = Serial1.readString(); // De gegevens worden geinitialiseerd als 'input', als het tekst of numbers zijn 
+    input.trim(); // Verwijder witruimte aan het begin en einde van 'input'
+
+    // Controleer de ontvangen tekst en voer de bijbehorende actie uit
+    if (input.equals("geel")) { //vergelijk input met 'geel'
+      geel(); // Roep de geel() functie aan 
+    } else if (input.equals("groen")) { //vergelijk input met 'groen'
+      groen(); // Roep de groen() functie aan 
+    } else if (input.equals("rood")) { //vergelijk input met 'rood'
+      rood(); // Roep de rood() functie aan 
+    }
+  }
+
+  buttona();   // Controleer of knop A is ingedrukt en voer dan gelijk de bijbehorende actie
+
+  buttonb();   // Controleer of knop B is ingedrukt en voer dan gelijk de bijbehorende actie
+
+  buttonc();  // Controleer of knop C is ingedrukt en voer dan gelijk de bijbehorende actie
+}
+
+// Functie om de gele led in te schakelen
+void geel() {
+  ledYellow(1); // Zet de gele led aan
+  Serial1.println(""); // Zorgt dat de uitgezonden bericht in de volgende line begint bij de XBee
+  Serial1.println("Led geel staat aan"); // Stuur een bericht naar de XBee dat de gele led aanstaat
+  delay(1000); // Wacht 1 seconde
+  ledYellow(0); // Zet de gele led uit
+}
+
+// Functie om de groene led in te schakelen
+void groen() {
+  ledGreen(1); // Zet de groene LED aan
+  Serial1.println(""); // Zorg dat de uitgezonden bericht in de volgende line begint bij de XBee
+  Serial1.println("Led groen staat aan"); // Stuur een bericht naar de XBee dat de groene led aanstaat
+  delay(1000); // Wacht 1 seconde
+  ledGreen(0); // Zet de groene led uit
+}
+
+// Functie om de rode led in te schakelen
+void rood() {
+  ledRed(1); // Zet de rode led aan
+  Serial1.println(""); // Zorg dat de uitgezonden bericht in de volgende line begint bij de XBee
+  Serial1.println("Led rood staat aan"); // Stuur een bericht naar de XBee dat de rode led aanstaat
+  delay(1000); // Wacht 1 seconde
+  ledRed(0); // Zet de rode led uit
+}
+
+// Functie om de status van knop A te controleren en daarbij de bijbehorende actie uit te voeren
+void buttona() {
+  if (buttonA.getSingleDebouncedPress()) { // Controleer of knop A een enkele gedebounceerde druk heeft
+    Serial1.println(""); // Zorg dat de uitgezonden bericht in de volgende line begint bij de XBee
+    Serial1.println("Knop A is gedrukt"); // Stuur een bericht naar de XBee 
+  }
+}
+
+// Functie om de status van knop B te controleren en daarbij de bijbehorende actie uit te voeren
+void buttonb() {
+  if (buttonB.getSingleDebouncedPress()) { // Controleer of knop B een enkele gedebounceerde druk heeft
+    ledYellow(1); // Zet de gele LED aan
+    ledGreen(1); // Zet de groene LED aan
+    ledRed(1); // Zet de rode LED aan
+    Serial1.println(""); // Zorg dat de uitgezonden bericht in de volgende line begint bij de XBee
+    Serial1.println("Knop B is gedrukt, dus alle lampen gaan aan"); // Stuur een bericht naar de XBee 
+    delay(1000); // Wacht 1 seconde
+    ledYellow(0); // Zet de gele LED uit
+    ledGreen(0); // Zet de groene LED uit
+    ledRed(0); // Zet de rode LED uit
+  }
+}
+
+// Functie om de status van knop C te controleren en daarbij de bijbehorende actie uit te voeren
+void buttonc() {
+  if (buttonC.getSingleDebouncedPress()) { // Controleer of knop C een enkele gedebounceerde druk heeft
+    static int teller = 0; // Initialiseer een teller variabele
+    teller += 1; // Verhoog de teller met 1 elke keer dat de knop gedrukt is
+    Serial1.print(F("Knop C is ")); // Stuur een bericht naar de XBee
+    Serial1.print(teller); // Stuur de waarde van de teller naar de XBee
+    Serial1.println(F(" keer gedrukt")); // Stuur een bericht naar de XBee
+  }
+}
