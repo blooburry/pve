@@ -28,8 +28,8 @@ const void SensorDataBuffer::stuurData() {
   for(size_t i = lijnNieuweDataIndex; i < lijnSensorData.elements(); ++i) {
     char report[120];
     snprintf_P(report, sizeof(report),
-               PSTR("LineSensor1: %6d    LineSensor2: %6d    LineSensor3: %6d"),
-               lijnSensorData[i].sensor1, lijnSensorData[i].sensor2, lijnSensorData[i].sensor3);
+               PSTR("LineSensor1: %6d    LineSensor2: %6d    LineSensor3: %6d,     LineSensor4: %6d,     LineSensor5: %6d"),
+               lijnSensorData[i].sensor1, lijnSensorData[i].sensor2, lijnSensorData[i].sensor3, lijnSensorData[i].sensor4, lijnSensorData[i].sensor5);
     Serial.println(report);
   }
   lijnNieuweDataIndex = lijnSensorData.elements();

@@ -21,6 +21,8 @@ class ProxySensor : public Zumo32U4ProximitySensors  {
         uint8_t rightValue;
         bool proxFrontActive;
         unsigned int readings[2] = {0, 0};
+        SensorDataBuffer* datasinkPointer;
+        StatusControl* sc;
 };
 
 #endif

@@ -27,3 +27,7 @@ StatusControl::tick() {
 StatusControl::proxSetSpeeds(int left, int right) {
     proxInstructions = {left, right};
 }
+
+void StatusControl::setStatus(Status s) {
+    status(s);
+}

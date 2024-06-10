@@ -8,10 +8,13 @@
 #include "../aansturing/StatusControl.h"
 #include "../aansturing/Motors.h"
 
+using Status = StatusControl::Status;
+
 int i = 0;
 SensorDataBuffer buffer;
 IMUSensor imu(&buffer);
 ProxySensor prox(&buffer);
+LijnSensor* lijnPtr;
 
 Xbee xb;
 KeyInterpreter kp(&xb);
@@ -43,6 +46,10 @@ void loop()
         Serial.println(F("Program start!"));
         Serial.print(F("Battery voltage: "));
         Serial.println(readBatteryMillivolts());
+        
+        sc.setStatus(Status::CALIBREREN);
+        LineSensor lijn(&buffer, &sc);
+        lijnPtr = &lijn;
     }
 
     sc.tick();
@@ -56,6 +63,7 @@ void loop()
         imu.sendToBuffer();
         prox.zieObject();
         prox.sendToBuffer();
+        lijnPtr->stuurNaarMotor();
         
         if(i % 10 == 0) { buffer.stuurData(); } // elke 10 seconden
     }

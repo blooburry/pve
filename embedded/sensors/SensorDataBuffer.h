@@ -20,6 +20,8 @@ public:
     int sensor1;
     int sensor2;
     int sensor3;
+    int sensor4;
+    int sensor5;
   };
 
   struct ProxSensorData {

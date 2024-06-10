@@ -6,8 +6,12 @@
 #include <Zumo32U4.h>
 #include "ProxySensor.h"
 #include "../aansturing/Motors.h"
+#include "SensorDataBuffer.h"
 
-ProxySensor::ProxySensor() {}
+ProxySensor::ProxySensor(SensorDataBuffer* datasinkPointer, StatusControl* sc):
+  datasink(datasinkPointer),
+  sc(sc)
+{}
 ProxySensor::~ProxySensor() {}
 
 Motors motors;
@@ -149,5 +153,7 @@ void ProxySensor::sendToBuffer() {
   rightValue = countsFrontWithRightLeds();
   readings[0] = leftValue;
   readings[1] = rightValue;
-  proxFrontActive = readBasicFront();
+
+  SensorDataBuffer::ProxSensorData data = { readings[0], readings[1]};
+  datasink->bufferDataLijn(data);
 }
