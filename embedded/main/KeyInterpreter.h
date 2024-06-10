@@ -25,6 +25,7 @@ public:
     ZET_PROXYSENSORS_AAN,
     STOP_MOTORS,
     STOP_MET_XBEE_GEBRUIK,
+    BEGIN_MET_XBEE_GEBRUIK
   };
 
   KeyInterpreter(Xbee* xbPtr);
