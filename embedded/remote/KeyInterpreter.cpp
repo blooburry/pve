@@ -1,5 +1,5 @@
-#include "keyinterpreter.h"
-#include "xbee.h"
+#include "KeyInterpreter.h"
+#include "Xbee.h"
 
 using Commando = KeyInterpreter::Commando;
 

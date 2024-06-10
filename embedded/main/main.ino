@@ -1,11 +1,15 @@
 #include <Wire.h>
 #include <Zumo32U4.h>
-#include "IMUSensor.h"
-#include "SensorDataBuffer.h"
+#include "../sensors/IMUSensor.h"
+#include "../sensors/SensorDataBuffer.h"
+#include "../remote/Xbee.h"
+#include "../remote/KeyInterpreter.h"
 
 int i = 0;
 SensorDataBuffer buffer;
 IMUSensor imu(&buffer);
+Xbee xb;
+KeyInterpreter kp(&xb);
 
 void setup()
 {
