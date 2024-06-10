@@ -1,5 +1,4 @@
 #include <Zumo32U4.h>
-
 #include <SimpleVector.h>
 
 using namespace std;

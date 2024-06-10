@@ -18,15 +18,7 @@ class LijnSensor : public Zumo32U4LineSensors {
 private:
   KleurLijnBerekening ber;
   StatusControl* sc;
-
-  /*! reference to the LijnSensor object */
-  const float Cpro = 0.35;
-  const float Cint = 0.0;
-  const float Cafg = 1.5;
-  const int dodeHoek = 100;
   SensorDataBuffer* datasink;
- // const int bufferSize = 5;  // Size of the buffer to store sensor readings
-  //SimpleVector<unsigned int> LijnSensordataBuffer[5];  // Buffer to store sensor readings
 
 public:
   unsigned int lsData[5];

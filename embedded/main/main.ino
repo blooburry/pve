@@ -17,11 +17,11 @@ Motors motors;
 StatusControl sc(&motors);
 SensorDataBuffer buffer;
 // IMUSensor imu(&buffer);
-// ProxySensor prox(&buffer, &sc);
-LijnSensor* lijnPtr;
+ProxySensor prox(&buffer, &sc);
+LijnSensor lijn(&buffer, &sc);
 
-// Xbee xb;
-// KeyInterpreter kp(&xb);
+Xbee xb;
+KeyInterpreter kp(&xb, &sc);
 
 Zumo32U4ButtonA buttonA;
 
@@ -38,28 +38,21 @@ void setup() {
   Serial1.print(F("Battery voltage: "));
   Serial1.println(readBatteryMillivolts());
 
-
-  LijnSensor lijn(&buffer, &sc);
-  lijnPtr = &lijn;
-
-  Serial1.println((uintptr_t) &buffer, HEX);
-  Serial1.println((uintptr_t) &sc, HEX);
-  Serial1.println((uintptr_t) lijnPtr, HEX);
-
-  lijnPtr->calibreer();
+  lijn.calibreer();
   Serial1.println("Setup klaar!");
 }
 
 void loop() {
-  lijnPtr->stuurNaarMotor();
+  kp.keyStatus();
+  lijn.stuurNaarMotor();
   // prox.zieObject();
 
   if ((int)(millis() - tijd2) >= 1000) {  // elke seconde (ongeveer)
     tijd2 = millis();
     // Stuur sensor data naar XBee
     // imu.sendToBuffer();
-    // prox.sendToBuffer();
-    lijnPtr->sendToBuffer();
+    prox.sendToBuffer();
+    lijn.sendToBuffer();
   }
 
   if ((int)(millis() - tijd) >= 10000) {  // elke 10 seconden (ongeveer)

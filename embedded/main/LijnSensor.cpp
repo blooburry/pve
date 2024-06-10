@@ -5,18 +5,9 @@
 #include <Arduino.h>
 #include <Zumo32U4.h>
 
-int16_t compensatie = 0;
-int16_t laatstecompensatie = 0;
-int16_t integraal = 0;
-int16_t afgeleide = 0;
-int16_t output = 0;
-
 using Kleur = KleurLijnBerekening::Kleur;
 
 using Status = StatusControl::Status;
-
-const uint16_t max = 300;
-const uint16_t maxGreenSpeed = 300;
 
 
 LijnSensor::LijnSensor(SensorDataBuffer* datasink, StatusControl* sc):
@@ -53,18 +44,6 @@ void LijnSensor::stuurNaarMotor() {
   readCalibrated(lsData);
 
   Kleur k = ber.vindLijnKleurStatus(lsData);
-
-  static char ruimte[50];
-  sprintf(ruimte, "%4d %4d %4d %4d %4d \n",
-          lsData[0],
-          lsData[1],
-          lsData[2],
-          lsData[3],
-          lsData[4]);
-  Serial1.print(ruimte);
-
-  Serial1.print("Kleur: ");
-  Serial1.println(k);
   
   int position;
   if(k == Kleur::ZWART) {
@@ -73,41 +52,25 @@ void LijnSensor::stuurNaarMotor() {
     position = readLineGroen(lsData);
   }
 
-  if((k == Kleur::ZWART || k == Kleur::GROEN) && (position != 0) && (position != 4000)) {
-
-    Serial1.print("Line op: ");
-    Serial1.println(position);
-
-    int16_t error = position - 2000;
-    Serial1.println(error);
-
-    // Bereken de integraal en afgeleide voor de PID-regelaar
-    //integraal = integraal + error;
-    //afgeleide = error - laatstecompensatie;
-
-    // Bereken de uitvoer van de PID-regelaar
-    output = (Cpro * error) + (Cint * integraal) + Cafg * afgeleide;
-
-    // Pas de motorsnelheden aan op basis van de uitvoer
-    int16_t linkssnelheid = (k == Kleur::GROEN) ? (maxGreenSpeed + output) : ((int16_t)max + output);
-    int16_t rechtssnelheid = (k == Kleur::GROEN) ? (maxGreenSpeed - output) : ((int16_t)max - output);
-
-    // Stel de compensatie voor de laatste iteratie in
-    laatstecompensatie = error;
-
-    // Beperk de motorsnelheden binnen het toegestane bereik
-    linkssnelheid = constrain(linkssnelheid, -100, (int16_t)max);
-    rechtssnelheid = constrain(rechtssnelheid, -100, (int16_t)max);
-
-    // Stuur de motors aan met de berekende snelheden
-    sc->lijnSetSpeeds(linkssnelheid, rechtssnelheid);
-  } else if (k == Kleur::WIT) {
-    sc->setStatus(Status::ZOEK_LIJN);
-    sc->lijnSetSpeeds(maxGreenSpeed, maxGreenSpeed);
-  } else if (k == Kleur::BRUIN) {
-    sc->setStatus(Status::DUW_BLOK);
-  } else {
-
+  if((position == 0) || (position == 4000)) { // geen lijn gevonden
+    switch(k) {
+      case Kleur::WIT :
+        sc->setStatus(Status::ZOEK_LIJN);
+        break;
+      case Kleur::BRUIN :
+        sc->setStatus(Status::DUW_BLOK);
+        break;
+    }
+  } else { // wel een lijn gevonden
+    switch(ber.kleurZeker) {
+      case Kleur::ZWART :
+        sc->setStatus(Status::VOLG_LIJN_ZWART);
+        sc->setLijnPositie(position);
+        break;
+      case Kleur::GROEN :
+        sc->setStatus(Status::VOLG_LIJN_GROEN);
+        sc->setLijnPositie(position);
+    }
   }
 }
 
@@ -163,7 +126,6 @@ int LijnSensor::readLineGroen(unsigned int *sensor_values)
         // If it last read to the right of center, return the max.
         else
             return (_numSensors-1)*1000;
-
     }
 
     _lastValue = avg/sum;

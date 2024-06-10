@@ -12,6 +12,9 @@ String Xbee::leesDataIn() {  //deze functie leest inkomende data binnen van de x
   if (Serial1.available() > 0) {
     input = Serial1.readString();
     input.trim();
+    Serial1.print("Ontvangen: <");
+    Serial1.print(input);
+    Serial1.println(">");
     return input;
   }
   return input;

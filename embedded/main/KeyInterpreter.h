@@ -2,10 +2,11 @@
 
 #include <SimpleVector.h>
 
+#include "StatusControl.h"
 #include "Xbee.h"
 
 using namespace std;
-
+using Commando = StatusControl::Commando;
 
 #ifndef KEYINTERPRETER_H
 #define KEYINTERPRETER_H
@@ -13,28 +14,14 @@ using namespace std;
 
 class KeyInterpreter {
 public:
-  enum Commando {
-    RECHTDOOR,
-    SNEL_RECHTDOOR,
-    BOCHT_RECHTS,
-    SCHERPE_BOCHT_RECHTS,
-    BOCHT_LINKS,
-    SCHERPE_BOCHT_LINKS,
-    ACHTERUIT,
-    SNEL_ACHTERUIT,
-    ZET_PROXYSENSORS_AAN,
-    STOP_MOTORS,
-    STOP_MET_XBEE_GEBRUIK,
-  };
-
-  KeyInterpreter(Xbee* xbPtr);
+  KeyInterpreter(Xbee* xbPtr, StatusControl* sc);
   ~KeyInterpreter();
-  Commando keyStatus();
+  void keyStatus();
 private:
   Xbee* xb;
   String input;
   Commando keystatus;
-
+  StatusControl* sc;
 };
 
 #endif
