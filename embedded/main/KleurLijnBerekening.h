@@ -5,6 +5,16 @@
 
 
 class KleurLijnBerekening {
+public:
+  enum Kleur {
+    ZWART, WIT, GROEN, GRIJS_LINKS, GRIJS_RECHTS, GRIJS_STOP, BRUIN
+  };
+  KleurLijnBerekening();
+  ~KleurLijnBerekening();
+  Kleur vindLijnKleurStatus(unsigned int lsData[4]);
+  Kleur stuurStatus();
+  bool tussen(unsigned int, unsigned int, unsigned int);
+
 private:
   unsigned int thZwart = 700;
   unsigned int thWit = 40;
@@ -16,11 +26,5 @@ private:
   unsigned int thBruinMax = 699;
   unsigned int kleurstatus = 0;
 
-public:
-  void printkk(unsigned int lsData[4]);
-  KleurLijnBerekening();
-  ~KleurLijnBerekening();
-  int vindLijnKleurStatus(unsigned int lsData[4]);
-  int stuurStatus();
 };
 #endif

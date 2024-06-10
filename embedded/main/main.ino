@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <Zumo32U4.h>
-#include "IMUSensor.h"
+// #include "IMUSensor.h"
 #include "ProxySensor.h"
 #include "SensorDataBuffer.h"
 #include "Xbee.h"
@@ -11,63 +11,64 @@
 
 using Status = StatusControl::Status;
 
-int i = 0;
+int tijd = 0;
+int tijd2 = 0;
 Motors motors;
 StatusControl sc(&motors);
 SensorDataBuffer buffer;
-IMUSensor imu(&buffer);
-ProxySensor prox(&buffer, &sc);
+// IMUSensor imu(&buffer);
+// ProxySensor prox(&buffer, &sc);
 LijnSensor* lijnPtr;
 
-Xbee xb;
-KeyInterpreter kp(&xb);
+// Xbee xb;
+// KeyInterpreter kp(&xb);
 
 Zumo32U4ButtonA buttonA;
 
-void setup()
-{
+void setup() {
+  Wire.begin();
+  Serial.begin(9600);  // baud rate
+  Serial1.begin(9600);
 
-    Wire.begin();
+  Serial1.println(F("Press A"));
+  buttonA.waitForButton();
 
-    while (!Serial)
-    {
-    } // block the thread until Serial is initialized
+  Serial1.println(F("======================================="));
+  Serial1.println(F("Program start!"));
+  Serial1.print(F("Battery voltage: "));
+  Serial1.println(readBatteryMillivolts());
 
-    i = 0;
-    Serial.begin(9600); // baud rate
-    
-    Serial1.print(F("Press A"));
-    buttonA.waitForButton();
+
+  LijnSensor lijn(&buffer, &sc);
+  lijnPtr = &lijn;
+
+  Serial1.println((uintptr_t) &buffer, HEX);
+  Serial1.println((uintptr_t) &sc, HEX);
+  Serial1.println((uintptr_t) lijnPtr, HEX);
+
+  lijnPtr->calibreer();
+  Serial1.println("Setup klaar!");
 }
 
-void loop()
-{
+void loop() {
+  lijnPtr->stuurNaarMotor();
+  // prox.zieObject();
 
-    if (i == 0)
-    {
-        Serial.println(F("======================================="));
-        Serial.println(F("Program start!"));
-        Serial.print(F("Battery voltage: "));
-        Serial.println(readBatteryMillivolts());
-      
-        LijnSensor lijn(&buffer, &sc);
-        lijnPtr = &lijn;
-        lijnPtr->calibreer();
-    }
+  if ((int)(millis() - tijd2) >= 1000) {  // elke seconde (ongeveer)
+    tijd2 = millis();
+    // Stuur sensor data naar XBee
+    // imu.sendToBuffer();
+    // prox.sendToBuffer();
+    lijnPtr->sendToBuffer();
+  }
 
-    if(millis() % 10000 < 100){ // elke 10 seconden (ongeveer)
-        Serial.print(F("t="));
-        Serial.print(i);
-        Serial.println(F("s"));
+  if ((int)(millis() - tijd) >= 10000) {  // elke 10 seconden (ongeveer)
+    tijd = millis();
 
-        // Stuur sensor data naar XBee
-        imu.sendToBuffer();
-        prox.zieObject();
-        prox.sendToBuffer();
-        lijnPtr->stuurNaarMotor();
-        
-        if(i % 10 == 0) { buffer.stuurData(); } // elke 10 seconden
-    }
+    Serial1.print(F("t="));
+    Serial1.print(millis() / 1000);
+    Serial1.println(F("s"));
 
-    i++;
+    buffer.stuurData();
+  }
 }

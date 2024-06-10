@@ -20,9 +20,9 @@ private:
   StatusControl* sc;
 
   /*! reference to the LijnSensor object */
-  const float Cpro = 0.7;
+  const float Cpro = 0.35;
   const float Cint = 0.0;
-  const float Cafg = 6.0;
+  const float Cafg = 1.5;
   const int dodeHoek = 100;
   SensorDataBuffer* datasink;
  // const int bufferSize = 5;  // Size of the buffer to store sensor readings
@@ -40,6 +40,8 @@ public:
   void calibreer();
   void stuurNaarMotor();
   void sendToBuffer();
+  int absolute(int);
+  int readLineGroen(unsigned int *sensor_values);
 };
 
 #endif

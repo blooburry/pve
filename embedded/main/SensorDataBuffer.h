@@ -37,11 +37,8 @@ public:
 
 private:
   SimpleVector<IMUSensorData> imuSensorData;
-  int imuNieuweDataIndex; // deze int houdt bij wat de index was van de eerste rij sensorData die nog niet doorgestuurd is naar de XBee
   SimpleVector<LijnSensorData> lijnSensorData;
-  int lijnNieuweDataIndex;
   SimpleVector<ProxSensorData> proxSensorData;
-  int proxNieuweDataIndex;
 };
 
 #endif
