@@ -28,7 +28,7 @@ const void SensorDataBuffer::stuurData() {
   for(size_t i = lijnNieuweDataIndex; i < lijnSensorData.elements(); ++i) {
     char report[120];
     snprintf_P(report, sizeof(report),
-               PSTR("Sensor1: %6d    Sensor2: %6d    Sensor3: %6d"),
+               PSTR("LineSensor1: %6d    LineSensor2: %6d    LineSensor3: %6d"),
                lijnSensorData[i].sensor1, lijnSensorData[i].sensor2, lijnSensorData[i].sensor3);
     Serial.println(report);
   }
@@ -37,8 +37,8 @@ const void SensorDataBuffer::stuurData() {
   for(size_t i = proxNieuweDataIndex; i < proxSensorData.elements(); ++i) {
     char report[120];
     snprintf_P(report, sizeof(report),
-               PSTR("ProxSensor: %6d"),
-               proxSensorData[i]);
+               PSTR("ProxSensorLeft: %6d    ProxSensorRight: %6d"),
+               proxSensorData[i].left, proxSensorData[i].right);
     Serial.println(report);
   }
   proxNieuweDataIndex = proxSensorData.elements();
@@ -52,6 +52,6 @@ void SensorDataBuffer::bufferDataLijn(const LijnSensorData &data) {
   lijnSensorData.push_back(data);
 };
 
-void SensorDataBuffer::bufferDataProx(const int data) {
+void SensorDataBuffer::bufferDataProx(const ProxSensorData &data) {
   proxSensorData.push_back(data);
 };

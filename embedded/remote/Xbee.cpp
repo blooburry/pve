@@ -4,8 +4,6 @@ Xbee::Xbee() {}
 
 Xbee::~Xbee() {}
 
-
-
 void Xbee::stuurDataNaarXbee(String x) {  //print dingen naar de xbee toe. Je kan de string aanpassen met andere waardes
   Serial1.println(x);
 }

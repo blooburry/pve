@@ -22,9 +22,14 @@ public:
     int sensor3;
   };
 
+  struct ProxSensorData {
+    int left;
+    int right;
+  }
+
   SensorDataBuffer();
   void bufferDataIMU(const IMUSensorData& data);
-  void bufferDataProx(const int data);
+  void bufferDataProx(const ProxSensorData& data);
   void bufferDataLijn(const LijnSensorData& data);
   const void stuurData();
 
@@ -33,7 +38,7 @@ private:
   int imuNieuweDataIndex; // deze int houdt bij wat de index was van de eerste rij sensorData die nog niet doorgestuurd is naar de XBee
   SimpleVector<LijnSensorData> lijnSensorData;
   int lijnNieuweDataIndex;
-  SimpleVector<int> proxSensorData;
+  SimpleVector<ProxSensorData> proxSensorData;
   int proxNieuweDataIndex;
 };
 

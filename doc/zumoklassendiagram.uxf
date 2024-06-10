@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>11</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>264</x><y>1386</y><w>231</w><h>209</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>168</x><y>882</y><w>147</w><h>133</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
 Zumo32U4LineSensors
 
 --
@@ -10,7 +10,7 @@ Zumo32U4LineSensors
 +initThreeSensors() : void
 +calibrate() : void
 +readCalibrated() : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1584</x><y>1111</y><w>363</w><h>396</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1008</x><y>707</y><w>231</w><h>252</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
 Zumo32U4IMU
 --
 +a: vector&lt;int16_t&gt;
@@ -33,24 +33,24 @@ Zumo32U4IMU
 +accDataReady(): bool
 +gyroDataReady(): bool
 +magDataReady(): bool
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2156</x><y>1265</y><w>198</w><h>121</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1372</x><y>805</y><w>126</w><h>77</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
 &lt;&lt;struct&gt;&gt;
 Zumo32U4IMU::vector&lt;T&gt;
 --
 +x: T
 +y: T
 +z: T
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2145</x><y>1122</y><w>198</w><h>121</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1365</x><y>714</y><w>126</w><h>77</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
 &lt;&lt;enum&gt;&gt;
 Zumo32U4IMUType: uint8_t
 --
 Unknown = 0 	
 LSM303D_L3GD20H = 1	
-LSM6DS33_LIS3MDL = 2</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1936</x><y>1276</y><w>242</w><h>44</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
-member</panel_attributes><additional_attributes>200;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1936</x><y>1122</y><w>231</w><h>55</h></coordinates><panel_attributes>lt=-
+LSM6DS33_LIS3MDL = 2</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1232</x><y>812</y><w>154</w><h>28</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+member</panel_attributes><additional_attributes>200;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1232</x><y>714</y><w>147</w><h>35</h></coordinates><panel_attributes>lt=-
 m1=*
 m2=1..1
-is of type &gt;</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2101</x><y>363</y><w>572</w><h>220</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
+is of type &gt;</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1337</x><y>231</y><w>364</w><h>140</h></coordinates><panel_attributes>&lt;&lt;lib:Zumo32U4&gt;&gt;
 Zumo32U4ProximitySensors
 --
 defaultLineSensorEmitterPin = 11 : static const uint8_t
@@ -63,17 +63,17 @@ initFrontSensor (uint8_t lineSensorEmitterPin=defaultLineSensorEmitterPin) : voi
 read () : void
 countsFrontWithLeftLeds () const : uint8_t
 countsFrontWithRightLeds () const : uint8_t
-readBasicFront () : bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1100</x><y>319</y><w>198</w><h>132</h></coordinates><panel_attributes>XBee code
+readBasicFront () : bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>203</y><w>126</w><h>84</h></coordinates><panel_attributes>XBee code
 --
 
 --
 ontvangData(): void
 stuurData(): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>770</y><w>231</w><h>88</h></coordinates><panel_attributes>Zumo32U4Encoders
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>490</y><w>147</w><h>56</h></coordinates><panel_attributes>Zumo32U4Encoders
 --
 -encoders.getCountsLeft()
 -encoders.getCountsRight()
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>418</x><y>770</y><w>231</w><h>110</h></coordinates><panel_attributes>Zumo32U4Motors
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>266</x><y>490</y><w>147</w><h>70</h></coordinates><panel_attributes>Zumo32U4Motors
 --
 -motors.setSpeeds(int): void
 -motorbeweginglinks(int): void
@@ -81,16 +81,16 @@ stuurData(): void
 --
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>792</y><w>220</w><h>66</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>504</y><w>140</w><h>42</h></coordinates><panel_attributes>lt=-
 m2=2
 m1=2
 De encoders kijken naar
 hoe ver de motors
-links of rechts bewegen</panel_attributes><additional_attributes>10;20;180;20</additional_attributes></element><element><id>Relation</id><coordinates><x>770</x><y>396</y><w>352</w><h>55</h></coordinates><panel_attributes>lt=-&gt;
+links of rechts bewegen</panel_attributes><additional_attributes>10;20;180;20</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>252</y><w>224</w><h>35</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=1
 stuurt data naar &gt;
-</panel_attributes><additional_attributes>300;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>1353</y><w>286</w><h>209</h></coordinates><panel_attributes>
+</panel_attributes><additional_attributes>300;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>861</y><w>182</w><h>133</h></coordinates><panel_attributes>
 Lijnsensors
 --
 -lijnsensorwaardes&lt;&gt;
@@ -102,28 +102,28 @@ Lijnsensors
 +calibrate() : void
 +readCalibrate() : void
 +stuurNaarMotor(*Sensordata&lt;&gt;) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>484</x><y>1485</y><w>198</w><h>33</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;160;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>990</x><y>803</y><w>539</w><h>99</h></coordinates><panel_attributes>Sensordata
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>308</x><y>945</y><w>126</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;160;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>511</y><w>343</w><h>63</h></coordinates><panel_attributes>Sensordata
 --
 -IMUSensordata: vector&lt;{acc: int, mag: int, gyro: int}&gt;
 -LineSensordata: vector&lt;{...}&gt;
 --
 -stuurData(); // wordt elke seoncden aangeroepen op nieuwe data te sturen
 +bufferData(); // stopt dingen in de Sensordata vector
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>913</x><y>891</y><w>231</w><h>484</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>581</x><y>567</y><w>147</w><h>308</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1= 1
 m2= 1..3
-</panel_attributes><additional_attributes>180;10;180;260;10;420</additional_attributes></element><element><id>UMLClass</id><coordinates><x>594</x><y>572</y><w>231</w><h>110</h></coordinates><panel_attributes>StatusControl
+</panel_attributes><additional_attributes>180;10;180;260;10;420</additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>364</y><w>147</w><h>70</h></coordinates><panel_attributes>StatusControl
 --
 - status: Status
 --
-+ bepalenStatus(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>594</x><y>671</y><w>88</w><h>121</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
++ bepalenStatus(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>378</x><y>427</y><w>56</w><h>77</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=1
 bestuurt
-</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1188</x><y>440</y><w>165</w><h>385</h></coordinates><panel_attributes>lt=-&gt;
+</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>756</x><y>280</y><w>105</w><h>245</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=1
-ontvangt data van v</panel_attributes><additional_attributes>10;330;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1177</x><y>1089</y><w>231</w><h>143</h></coordinates><panel_attributes>IMUSensor
+ontvangt data van v</panel_attributes><additional_attributes>10;330;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>749</x><y>693</y><w>147</w><h>91</h></coordinates><panel_attributes>IMUSensor
 --
 #x: int
 #y: int
@@ -131,75 +131,75 @@ ontvangt data van v</panel_attributes><additional_attributes>10;330;10;10</addit
 --
 +leesGyro(): void
 +leesAcc(): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1397</x><y>1188</y><w>209</w><h>33</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1254</x><y>891</y><w>44</w><h>220</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>889</x><y>756</y><w>133</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>798</x><y>567</y><w>28</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1= 1
 m2= 1
-</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1672</x><y>374</y><w>231</w><h>99</h></coordinates><panel_attributes>ProximitySensors
+</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1064</x><y>238</y><w>147</w><h>63</h></coordinates><panel_attributes>ProximitySensors
 --
 -afstandObject: int
 --
 +berekenAfstandObject(): int
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1892</x><y>451</y><w>231</w><h>33</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;190;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1353</x><y>429</y><w>341</w><h>396</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1204</x><y>287</y><w>147</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;190;10</additional_attributes></element><element><id>Relation</id><coordinates><x>861</x><y>273</y><w>217</w><h>252</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1= 1
 m2= 1
-</panel_attributes><additional_attributes>10;340;10;10;290;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1650</x><y>627</y><w>231</w><h>88</h></coordinates><panel_attributes>ObstakelBereking
+</panel_attributes><additional_attributes>10;340;10;10;290;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1050</x><y>399</y><w>147</w><h>56</h></coordinates><panel_attributes>ObstakelBereking
 --
 -object: int
 --
-+berekenObject(): intv</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1331</x><y>704</y><w>451</w><h>407</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
++berekenObject(): intv</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>847</x><y>448</y><w>287</w><h>259</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
-m2=1</panel_attributes><additional_attributes>10;350;390;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>462</y><w>44</w><h>187</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes><additional_attributes>10;350;390;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1120</x><y>294</y><w>28</w><h>119</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
-m2=1</panel_attributes><additional_attributes>10;150;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>11</x><y>0</y><w>209</w><h>33</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;170;10</additional_attributes></element><element><id>Relation</id><coordinates><x>814</x><y>649</y><w>858</w><h>55</h></coordinates><panel_attributes>lt=&lt;-
+m2=1</panel_attributes><additional_attributes>10;150;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>7</x><y>0</y><w>133</w><h>21</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;170;10</additional_attributes></element><element><id>Relation</id><coordinates><x>518</x><y>413</y><w>546</w><h>35</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=1
-&lt; stuurt snelheid naar </panel_attributes><additional_attributes>10;20;760;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>726</x><y>968</y><w>231</w><h>77</h></coordinates><panel_attributes>RichtingLijnBerekening
+&lt; stuurt snelheid naar </panel_attributes><additional_attributes>10;20;760;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>462</x><y>616</y><w>147</w><h>49</h></coordinates><panel_attributes>RichtingLijnBerekening
 --
 -richting: string
 --
 berekenRichting():
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>803</x><y>1034</y><w>44</w><h>341</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>511</x><y>658</y><w>28</w><h>217</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1= 1
 m2= 1
-</panel_attributes><additional_attributes>10;10;10;290</additional_attributes></element><element><id>Relation</id><coordinates><x>770</x><y>671</y><w>176</w><h>319</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;10;10;290</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>427</y><w>112</w><h>203</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=1
-&lt; stuurt snelheid naar </panel_attributes><additional_attributes>10;10;10;270</additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>1067</y><w>264</w><h>88</h></coordinates><panel_attributes>LijnberekeningKleur
+&lt; stuurt snelheid naar </panel_attributes><additional_attributes>10;10;10;270</additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>679</y><w>168</w><h>56</h></coordinates><panel_attributes>LijnberekeningKleur
 --
 -string kleur
 --
-+ lijnberekening(int, int, int): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>572</x><y>1144</y><w>209</w><h>231</h></coordinates><panel_attributes>lt=&lt;-
++ lijnberekening(int, int, int): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>364</x><y>728</y><w>133</w><h>147</h></coordinates><panel_attributes>lt=&lt;-
 m1=3
 m2=1
-&lt; stuurt data naar</panel_attributes><additional_attributes>10;10;120;190</additional_attributes></element><element><id>Relation</id><coordinates><x>671</x><y>671</y><w>44</w><h>418</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+&lt; stuurt data naar</panel_attributes><additional_attributes>10;10;120;190</additional_attributes></element><element><id>Relation</id><coordinates><x>427</x><y>427</y><w>28</w><h>266</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1= 1
 m2= 1
-</panel_attributes><additional_attributes>10;10;10;360</additional_attributes></element><element><id>Relation</id><coordinates><x>946</x><y>968</y><w>253</w><h>154</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;360</additional_attributes></element><element><id>Relation</id><coordinates><x>602</x><y>616</y><w>161</w><h>98</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1= 1
 m2= 1
-</panel_attributes><additional_attributes>210;120;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>396</y><w>231</w><h>99</h></coordinates><panel_attributes>keyInterpreter
+</panel_attributes><additional_attributes>210;120;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>252</y><w>147</w><h>63</h></coordinates><panel_attributes>keyInterpreter
 --
 - input: string
 --
-ontvangData(); void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>704</x><y>484</y><w>44</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+ontvangData(); void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>308</y><w>28</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
-m2=1</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1628</x><y>792</y><w>198</w><h>88</h></coordinates><panel_attributes>&lt;&lt;struct&gt;&gt; Point3D
+m2=1</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1036</x><y>504</y><w>126</w><h>56</h></coordinates><panel_attributes>&lt;&lt;struct&gt;&gt; Point3D
 --
 -x: float
 -y: float
 -z: float
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1628</x><y>891</y><w>198</w><h>88</h></coordinates><panel_attributes>&lt;&lt;struct&gt;&gt; IMUSensorData
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1036</x><y>567</y><w>126</w><h>56</h></coordinates><panel_attributes>&lt;&lt;struct&gt;&gt; IMUSensorData
 --
 -gyro: Point3D
 -mag: Point3D
 -acc: Point3D
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1518</x><y>825</y><w>132</w><h>33</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1518</x><y>825</y><w>132</w><h>132</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1628</x><y>990</y><w>198</w><h>88</h></coordinates><panel_attributes>&lt;&lt;struct&gt;&gt; LineSensorData
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>966</x><y>525</y><w>84</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>966</x><y>525</y><w>84</w><h>84</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1036</x><y>630</y><w>126</w><h>56</h></coordinates><panel_attributes>&lt;&lt;struct&gt;&gt; LineSensorData
 --
 -sensor1: int
 -sensor2: int
--sensor3 int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1518</x><y>825</y><w>132</w><h>231</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;190</additional_attributes></element><element><id>UMLNote</id><coordinates><x>847</x><y>539</y><w>176</w><h>66</h></coordinates><panel_attributes>Deze klas bevat alle
+-sensor3 int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>966</x><y>525</y><w>84</w><h>147</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;190</additional_attributes></element><element><id>UMLNote</id><coordinates><x>539</x><y>343</y><w>112</w><h>42</h></coordinates><panel_attributes>Deze klas bevat alle
  wedstrijdregels als 
-verschillende "statussen"</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>297</x><y>561</y><w>198</w><h>154</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+verschillende "statussen"</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>189</x><y>357</y><w>126</w><h>98</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 Status
 --
 VolgLijn= 0 	
@@ -207,6 +207,6 @@ HandModus = 1
 DuwBlokje = 2
 OnthoudtRichting = 3
 HalveSnelheid = 4
-WipModus = 5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>484</x><y>572</y><w>132</w><h>44</h></coordinates><panel_attributes>lt=-
+WipModus = 5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>308</x><y>364</y><w>84</w><h>28</h></coordinates><panel_attributes>lt=-
 m1=1
 m2=1</panel_attributes><additional_attributes>10;10;100;10</additional_attributes></element></diagram>

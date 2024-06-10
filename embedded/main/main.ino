@@ -1,15 +1,22 @@
 #include <Wire.h>
 #include <Zumo32U4.h>
 #include "../sensors/IMUSensor.h"
+#include "../sensors/ProxySensor.h"
 #include "../sensors/SensorDataBuffer.h"
 #include "../remote/Xbee.h"
 #include "../remote/KeyInterpreter.h"
+#include "../aansturing/StatusControl.h"
+#include "../aansturing/Motors.h"
 
 int i = 0;
 SensorDataBuffer buffer;
 IMUSensor imu(&buffer);
+ProxySensor prox(&buffer);
+
 Xbee xb;
 KeyInterpreter kp(&xb);
+Motors motors;
+StatusControl sc(&motors);
 
 void setup()
 {
@@ -22,6 +29,9 @@ void setup()
 
     i = 0;
     Serial.begin(9600); // baud rate
+    
+    Serial1.print(F("Press A"));
+    buttonA.waitForButton();
 }
 
 void loop()
@@ -35,14 +45,20 @@ void loop()
         Serial.println(readBatteryMillivolts());
     }
 
-    Serial.print(F("t="));
-    Serial.print(i);
-    Serial.println(F("s"));
+    sc.tick();
 
-    imu.sendToBuffer();
+    if(millis() % 10000 < 100){ // elke 10 seconden (ongeveer)
+        Serial.print(F("t="));
+        Serial.print(i);
+        Serial.println(F("s"));
 
-    if(i % 10 == 0) { buffer.stuurData(); } // elke 10 seconden
+        // Stuur sensor data naar XBee
+        imu.sendToBuffer();
+        prox.zieObject();
+        prox.sendToBuffer();
+        
+        if(i % 10 == 0) { buffer.stuurData(); } // elke 10 seconden
+    }
 
-    delay(1000);
     i++;
 }
