@@ -13,6 +13,9 @@ KeyInterpreter::~KeyInterpreter() {}
 Commando KeyInterpreter::keyStatus() {  //leeste data van de xbee en geeft een bijbehorende return eraan
 
   input = xb->leesDataIn();
+  if (input.equals("Y")) {
+    keyStatus = Commando::BEGIN_MET_XBEE_GEBRUIK;
+  }
   if (input.equals("w")) {
     keystatus = Commando::RECHTDOOR;
     return keystatus;
