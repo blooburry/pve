@@ -6,9 +6,7 @@
 #include <Zumo32U4.h>
 
 using Kleur = KleurLijnBerekening::Kleur;
-
 using Status = StatusControl::Status;
-
 
 LijnSensor::LijnSensor(SensorDataBuffer* datasink, StatusControl* sc):
   ber(),
@@ -62,14 +60,20 @@ void LijnSensor::stuurNaarMotor() {
         break;
     }
   } else { // wel een lijn gevonden
+
+    int16_t error = position - 2000;
+    int linkssnelheid, rechtssnelheid;
+    pid(error, Kleur::ZWART, linkssnelheid, rechtssnelheid);
     switch(ber.kleurZeker) {
       case Kleur::ZWART :
         sc->setStatus(Status::VOLG_LIJN_ZWART);
-        sc->setLijnPositie(position);
+        sc->lijnSetSpeeds(linkssnelheid, rechtssnelheid);
         break;
       case Kleur::GROEN :
+        pid(error, Kleur::GROEN, linkssnelheid, rechtssnelheid);
+
         sc->setStatus(Status::VOLG_LIJN_GROEN);
-        sc->setLijnPositie(position);
+        sc->lijnSetSpeeds(linkssnelheid, rechtssnelheid);
     }
   }
 }
@@ -83,6 +87,24 @@ void LijnSensor::sendToBuffer() {
 
 int LijnSensor::absolute(int v) {
   return v > 0 ? v : -v;
+}
+
+void LijnSensor::pid(int error, Kleur k, int& linkssnelheid, int& rechtssnelheid) {
+  
+  integraal = integraal + error;
+  afgeleide = error - laatstecompensatie;
+
+  output = (Cpro * error) + (Cint * integraal) + Cafg * afgeleide;
+
+  // Pas de motorsnelheden aan op basis van de uitvoer
+  linkssnelheid = (k == Kleur::GROEN) ? (MAX_SPEED_GROEN + output) : ((int16_t)MAX_SPEED + output);
+  rechtssnelheid = (k == Kleur::GROEN) ? (MAX_SPEED_GROEN - output) : ((int16_t)MAX_SPEED - output);
+
+  // Stel de compensatie voor de laatste iteratie in
+  laatstecompensatie = error;
+  // Beperk de motorsnelheden binnen het toegestane bereik
+  linkssnelheid = constrain(linkssnelheid, -100, (int16_t) MAX_SPEED);
+  rechtssnelheid = constrain(rechtssnelheid, -100, (int16_t) MAX_SPEED);
 }
 
 int LijnSensor::readLineGroen(unsigned int *sensor_values)
@@ -123,7 +145,7 @@ int LijnSensor::readLineGroen(unsigned int *sensor_values)
         if(_lastValue < (_numSensors-1)*1000/2)
             return 0;
 
-        // If it last read to the right of center, return the max.
+        // If it last read to the right of center, return the MAX_SPEED.
         else
             return (_numSensors-1)*1000;
     }

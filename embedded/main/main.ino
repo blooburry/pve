@@ -45,7 +45,7 @@ void setup() {
 void loop() {
   kp.keyStatus();
   lijn.stuurNaarMotor();
-  // prox.zieObject();
+  prox.zieObject();
 
   if ((int)(millis() - tijd2) >= 1000) {  // elke seconde (ongeveer)
     tijd2 = millis();

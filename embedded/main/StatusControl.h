@@ -38,18 +38,12 @@ class StatusControl {
     void lijnSetSpeeds(int, int);
     void setStatus(Status);
     void besturing(Commando);
-    void setLijnPositie(int);
 
   private:
     Status status;
     VolgendeBocht volgendeBocht;
     Motors* motors;
     int lijnPositie;
-    int* pid();
-    const float Cpro = 0.35;
-    const float Cint = 0.0;
-    const float Cafg = 1.5;
-    const int dodeHoek = 100;
 };
 
 #endif

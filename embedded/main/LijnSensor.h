@@ -9,6 +9,7 @@
 #include "KleurLijnBerekening.h"
 
 using namespace std;
+using Kleur = KleurLijnBerekening::Kleur;
 
 
 /*!
@@ -19,6 +20,18 @@ private:
   KleurLijnBerekening ber;
   StatusControl* sc;
   SensorDataBuffer* datasink;
+  const float Cpro = 0.35;
+  const float Cint = 0.0;
+  const float Cafg = 1.5;
+  const int dodeHoek = 100;
+  int16_t error = 0;
+  int16_t laatstecompensatie = 0;
+  int16_t integraal = 0;
+  int16_t afgeleide = 0;
+  int16_t output = 0;
+  
+  const uint16_t MAX_SPEED = 300;
+  const uint16_t MAX_SPEED_GROEN = 150;
 
 public:
   unsigned int lsData[5];
@@ -34,6 +47,7 @@ public:
   void sendToBuffer();
   int absolute(int);
   int readLineGroen(unsigned int *sensor_values);
+  void pid(int error, Kleur k, int& links, int& rechts);
 };
 
 #endif
