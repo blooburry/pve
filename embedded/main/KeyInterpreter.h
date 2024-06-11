@@ -14,14 +14,20 @@ using Commando = StatusControl::Commando;
 
 class KeyInterpreter {
 public:
+  /*! constructor */
   KeyInterpreter(Xbee* xbPtr, StatusControl* sc);
+
+  /*! destructor */
   ~KeyInterpreter();
+  /*! methode die het toetsenbord checkt voor input en stuurt deze door naar de statuscontrol klasse */
   void keyStatus();
 private:
-  Xbee* xb;
-  String input;
-  Commando keystatus;
-  StatusControl* sc;
+
+  
+  Xbee* xb; //!< Xbee pointer
+  String input; //!< object dat de input toetsen bevat
+  Commando keystatus; //<! object die de commands aan de motors bevat
+  StatusControl* sc; //!< statuscontrol pointer
 };
 
 #endif
