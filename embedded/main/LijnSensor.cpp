@@ -45,7 +45,7 @@ void LijnSensor::stuurNaarMotor() {
   
   int position;
   if(k == Kleur::ZWART) {
-    position = readLine(lsData);
+    position = readLineGroen(lsData); //was eerste readLine(lsData);
   } else { // hij is groen
     position = readLineGroen(lsData);
   }
@@ -91,8 +91,8 @@ int LijnSensor::absolute(int v) {
 
 void LijnSensor::pid(int error, Kleur k, int& linkssnelheid, int& rechtssnelheid) {
   
-  integraal = integraal + error;
-  afgeleide = error - laatstecompensatie;
+ // integraal = integraal + error;
+  //afgeleide = error - laatstecompensatie;
 
   output = (Cpro * error) + (Cint * integraal) + Cafg * afgeleide;
 
