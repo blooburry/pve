@@ -20,18 +20,19 @@ private:
   KleurLijnBerekening ber;
   StatusControl* sc;
   SensorDataBuffer* datasink;
-  const float Cpro = 0.35;
+  const float Cpro = -4.6;
   const float Cint = 0.0;
-  const float Cafg = 1.5;
+  const float Cafg = -4;
   const int dodeHoek = 100;
+
   int16_t error = 0;
   int16_t laatstecompensatie = 0;
   int16_t integraal = 0;
   int16_t afgeleide = 0;
   int16_t output = 0;
   
-  const uint16_t MAX_SPEED = 300;
-  const uint16_t MAX_SPEED_GROEN = 150;
+  const uint16_t MAX_SPEED = 320;
+  const uint16_t MAX_SPEED_GROEN = 250;
 
 public:
   unsigned int lsData[5];
