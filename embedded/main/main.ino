@@ -39,6 +39,7 @@ void setup() {
   Serial1.println(readBatteryMillivolts());
 
   lijn.calibreer();
+  prox.setup();
   Serial1.println("Setup klaar!");
 }
 
