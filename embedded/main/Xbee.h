@@ -9,13 +9,17 @@ using namespace std;
 
 class Xbee {
 private:
-  SimpleVector<int> sensorData;
-  String input;
+  SimpleVector<int> sensorData; //!< vector met alle sensordata
+  String input; //!< object die ontvangen data bevat
 
 public:
+ /*! constructor */
   Xbee();
+  /*! destructor */
   ~Xbee();
+  /*! methode die een string print naar de xbee */
   void stuurDataNaarXbee(String);
+  /*! methode die ingezonden data uitprint in de xbee */
   String leesDataIn();
 };
 

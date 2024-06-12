@@ -7,25 +7,38 @@
 #include "SensorDataBuffer.h"
 #include "StatusControl.h"
 
-class ProxySensor : public Zumo32U4ProximitySensors  {
-    public:
-      ProxySensor(SensorDataBuffer* datasinkPointer, StatusControl* sc);
-      ~ProxySensor();
-      void setup();
-      bool zieObject();
-      void sendToBuffer(); // stuur de data naar de SensorDataBuffer
-        
-    private:
-      StatusControl* sc;
-      SensorDataBuffer* datasink;
-      const uint8_t sensorThreshold = 5;
-      uint8_t leftValue;
-      uint8_t rightValue;
-      bool proxFrontActive;
-      unsigned int readings[2] = {0, 0};
-      void turnLeft();
-      void turnRight();
-      void stop();
+class ProxySensor : public Zumo32U4ProximitySensors {
+public:
+  /*! constructor met pointers naar Statuscontrol en Sensordatabuffer */
+  ProxySensor(SensorDataBuffer* datasinkPointer, StatusControl* sc);
+  /*! constructor met pointer naar Statuscontrol */
+  ProxySensor(StatusControl* sc);
+  /*! constructor */
+  ProxySensor();
+  /*! destructor */
+  ~ProxySensor();
+  /*! deze methode initialiseert de Proximitysensor */
+  void setup();
+  /*! deze methode wordt gebruikt om een object te vinden en deze weg te duwen */
+  bool zieObject();
+  /*! stuur data naar de sensordatabuffer klasse */
+  void sendToBuffer(); 
+
+private:
+  StatusControl* sc; //!< statuscontrol pointer die gebruikt wordt om de snelheden van de motoren aan te passen
+  SensorDataBuffer* datasink; //!< Sensordatabuffer pointer voor het sturen van sensordata
+  const uint8_t sensorThreshold = 5; //!< threshold voor het zien van een object
+  uint8_t leftValue; //!< sensorwaarde van de linkersensor
+  uint8_t rightValue; //!< sensorwaarde van de rechtersensor
+  
+  //bool proxFrontActive;  
+  unsigned int readings[2] = { 0, 0 }; //!< array waarin de proximitywaardes worden opgeslagen
+  /*! methode om naar links te draaien */
+  void turnLeft();
+  /*! methode om naar rechts te draaien */
+  void turnRight();
+  /*! methode om te stoppen */
+  void stop();
 };
 
 #endif
