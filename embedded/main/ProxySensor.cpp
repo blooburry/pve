@@ -1,6 +1,5 @@
 #include "HardwareSerial.h"
 #include <Arduino.h>
-//#include <cstdio> // Voor sprintf
 #include <stdint.h>
 #include <Wire.h>
 #include <Zumo32U4.h>
@@ -18,7 +17,8 @@ ProxySensor::~ProxySensor() {}
 // A sensors reading must be greater than or equal to this
 // threshold in order for the program to consider that sensor as
 // seeing an object.
-const uint8_t sensorThreshold = 6;
+// In de ProxySensor.h file is al een waarde gegeven aan de threshold dus vandaar dat het uitgecomment is.
+// const uint8_t sensorThreshold = 5;
 
 // The maximum speed to drive the motors while turning.  400 is
 // full speed.
@@ -84,7 +84,6 @@ bool ProxySensor::zieObject() {
   // Determine if an object is visible or not.
   bool objectSeen = leftValue >= sensorThreshold || rightValue >= sensorThreshold;
   bool zekerweten = leftValue == rightValue;
-  // return zekerweten;
 
   if (objectSeen) {
     // An object is visible, so we will start decelerating in
@@ -102,7 +101,7 @@ bool ProxySensor::zieObject() {
   turnSpeed = constrain(turnSpeed, turnSpeedMin, turnSpeedMax);
 
   if (objectSeen) {
-    // An object seen.
+    // An object is seen.
     ledYellow(1);
 
     if (leftValue < rightValue) {
