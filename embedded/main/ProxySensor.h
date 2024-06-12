@@ -17,7 +17,7 @@ public:
   ProxySensor();
   /*! destructor */
   ~ProxySensor();
-  /*! deze methode initialiseert de Proximitysensor */
+  /*! deze methode initialiseert de ProximityFrontsensor */
   void setup();
   /*! deze methode wordt gebruikt om een object te vinden en deze weg te duwen */
   bool zieObject();
@@ -28,8 +28,8 @@ private:
   StatusControl* sc; //!< statuscontrol pointer die gebruikt wordt om de snelheden van de motoren aan te passen
   SensorDataBuffer* datasink; //!< Sensordatabuffer pointer voor het sturen van sensordata
   const uint8_t sensorThreshold = 5; //!< threshold voor het zien van een object
-  uint8_t leftValue; //!< sensorwaarde van de linkersensor
-  uint8_t rightValue; //!< sensorwaarde van de rechtersensor
+  uint8_t leftValue; //!< sensorwaarde van de frontsensor met de linker IR-led
+  uint8_t rightValue; //!< sensorwaarde van de frontsensor met de rechter IR-led
   
   //bool proxFrontActive;  
   unsigned int readings[2] = { 0, 0 }; //!< array waarin de proximitywaardes worden opgeslagen
