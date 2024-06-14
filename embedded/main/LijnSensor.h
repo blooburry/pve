@@ -50,7 +50,6 @@ public:
   void stuurNaarMotor();
   /*! stuurt data naar de Sensordatabuffer klasse */
   void sendToBuffer();
- // int absolute(int);
 
   /*! deze methode berekend de output waarde doormiddel van een PID */
   void pid(int error, Kleur k, int& links, int& rechts);
