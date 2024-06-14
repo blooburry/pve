@@ -37,9 +37,7 @@ void StatusControl::lijnSetSpeeds(int left, int right)
   {
     motors->setSpeeds(left, right);
   } else {
-    // Serial1.print("Status is ");
-    // Serial1.print(status);
-    // Serial1.println(", ignoring instruction.");
+  
   }
 }
 
@@ -57,8 +55,7 @@ void StatusControl::setStatus(Status status)
 
   if(this->status != status) { // als de huidige status niet hetzelfde is al de variabele status dan wordt deze gelijkgesteld.
     this->status = status;
-    //Serial1.print("Status veranderd naar: ");
-    //Serial1.println(status);
+    
   }
 
   switch (status) { // switchcase met de lijnvolgende statussen
