@@ -11,13 +11,11 @@ KleurLijnBerekening::~KleurLijnBerekening() {
 Kleur KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
 
   if ((lsData[0] < thWit) && (lsData[1] < thWit) && (lsData[2] < thWit) && (lsData[3] < thWit) && (lsData[4]< thWit)) { // wit gevonden
-    //Serial1.println("wit");
     kleurstatus = Kleur::WIT;
     pushGeschiedenis(kleurstatus);
     return kleurstatus;
   }    
 
-  //Serial1.println("voor de kleurberekening");
   if (
     (tussen(thBruinMin, thBruinMax, lsData[0])) 
     && (tussen(thBruinMin, thBruinMax, lsData[1])) 
@@ -26,7 +24,6 @@ Kleur KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
     && (tussen(thBruinMin, thBruinMax, lsData[4])) 
   ) { // bruin gevonden
     kleurstatus = Kleur::BRUIN;
-    //Serial1.println("bruin");
     pushGeschiedenis(kleurstatus);
     return kleurstatus;
   }
@@ -36,7 +33,6 @@ Kleur KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
     && (!tussen(thGrijsMin, thGrijsMax, lsData[4]))
   ) { // grijs op links gevonden
     kleurstatus = Kleur::GRIJS_LINKS;
-    // Serial1.println("grijslinks");
     pushGeschiedenis(kleurstatus);
     return kleurstatus;
   } 
@@ -45,7 +41,6 @@ Kleur KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
     && (!tussen(thGrijsMin, thGrijsMax, lsData[0]))
   ) { // grijs op rechts gevonden
     kleurstatus = Kleur::GRIJS_RECHTS;
-    // Serial1.println("grijsrechts");
     pushGeschiedenis(kleurstatus);
     return kleurstatus;
   } else if ( // grijs aan beide kanten gevonden
@@ -53,7 +48,6 @@ Kleur KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
     && tussen(thGrijsMin, thGrijsMax, lsData[4])
   ) {
     kleurstatus = Kleur::GRIJS_STOP;
-    // Serial1.println("grijsstoppen");
     pushGeschiedenis(kleurstatus);
     return kleurstatus;
   }
@@ -64,7 +58,6 @@ Kleur KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
     || tussen(thGroenMin, thGroenMax, lsData[3])
   ) { // groen gevonden
     kleurstatus = Kleur::GROEN;
-   // Serial1.println("groen");
     pushGeschiedenis(kleurstatus);
     return kleurstatus;
   }
@@ -75,7 +68,6 @@ Kleur KleurLijnBerekening::vindLijnKleurStatus(unsigned int lsData[4]) {
     || tussen(thZwart, 1500, lsData[3])
   ) { // zwart gevonden
     kleurstatus = Kleur::ZWART;
-    //Serial1.println("zwart");
     pushGeschiedenis(kleurstatus);
     return kleurstatus;
   }
