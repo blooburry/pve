@@ -43,11 +43,7 @@ void LijnSensor::stuurNaarMotor() {
   Kleur k = ber.vindLijnKleurStatus(lsData); // vind de kleur van de lijn
 
   int position = 0;
-  /*if (k == Kleur::ZWART) {
-    position = readLine(lsData);   //readLineGroen(lsData);  //was eerste readLine(lsData);
-  } else if (k == Kleur::GROEN) {  // hij is groen
-    position = readLine(lsData);
-  }*/
+  
   position = readLine(lsData);
 
 
@@ -61,7 +57,6 @@ void LijnSensor::stuurNaarMotor() {
         break;
     }
   } else {  // wel een lijn gevonden
-    //Serial1.println(position);
     int16_t error = position - 2000;
     int linkssnelheid, rechtssnelheid;
     pid(error, Kleur::ZWART, linkssnelheid, rechtssnelheid);
@@ -92,9 +87,7 @@ void LijnSensor::sendToBuffer() {
   datasink->bufferDataLijn(data);
 }
 
-/*int LijnSensor::absolute(int v) {
-  return v > 0 ? v : -v;
-} */
+
 
 void LijnSensor::pid(int error, Kleur k, int& linkssnelheid, int& rechtssnelheid) {
 
